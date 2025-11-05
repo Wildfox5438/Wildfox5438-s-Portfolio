@@ -121,4 +121,68 @@
                 <a href="https://discord.gg/2hBSxA6DJm" target="_blank" class="btn">Cloud Customs</a>
                 <a href="https://discord.gg/xXy6C8FvCB" target="_blank" class="btn">Concept Customs</a>
                 <a href="https://discord.gg/jcS3ctngPX" target="_blank" class="btn">Pulse Customs</a>
-           
+                           </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Wildfox5438. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const portfolioGrid = document.getElementById('portfolio-grid');
+            const totalSlots = 30;
+
+            // Add your images here
+            const myImages = [
+                'image1.png',  'image2.png',  'image3.png',  'image4.png',  'image5.png',
+                'image6.png',  'image7.png',  'image8.png',  'image9.png',  'image10.png',
+                'image11.png', 'image12.png', 'image13.png', 'image14.png', 'image15.png',
+                'image16.png', 'image17.png', 'image18.png', 'image19.png', 'image20.png',
+                'image21.png', 'image22.png', 'image23.png', 'image24.png', 'image25.png',
+                'image26.png', 'image27.png', 'image28.png', 'image29.png', 'image30.png'
+            ];
+
+            for (let i = 0; i < totalSlots; i++) {
+                const item = document.createElement('div');
+                item.classList.add('portfolio-item', 'hidden'); 
+
+                const imageName = myImages[i];
+                const displayName = `Image ${i + 1}`;
+
+                if (imageName && imageName.trim() !== '') {
+                    item.innerHTML = `
+                        <img src="${imageName}" alt="${displayName}">
+                        <div class="overlay">${displayName}</div>
+                    `;
+                } else {
+                    item.innerHTML = `
+                        <span class="coming-soon">Coming soon...</span>
+                        <div class="overlay">${displayName}</div>
+                    `;
+                }
+
+                portfolioGrid.appendChild(item);
+            }
+
+            // Scroll animation
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('show');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            const hiddenElements = document.querySelectorAll('.hidden');
+            hiddenElements.forEach((el) => observer.observe(el));
+        });
+    </script>
+
+</body>
+</html>
+
