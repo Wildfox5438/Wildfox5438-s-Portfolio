@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TxDPS Constable Package</title>
+<style>
+body { background:#101010; color:white; font-family:Arial,sans-serif; text-align:center; padding:50px; }
+h1 { color:#00f0ff; margin-bottom:20px; }
+#carousel { width:400px; height:250px; margin:0 auto 20px; border-radius:15px; overflow:hidden; }
+#carousel img { width:100%; height:100%; object-fit:contain; transition:opacity 1s ease; position:absolute; }
+.vehicles { text-align:left; max-width:600px; margin:0 auto 20px; }
+button { background:#00f0ff; color:#101010; padding:15px 30px; border:none; border-radius:50px; cursor:pointer; font-weight:bold; margin:10px; }
+button:hover { background:#00c0ff; }
+.notice { color:#888; font-style:italic; margin-top:15px; }
+</style>
+</head>
+<body>
+
+<h1>TxDPS Constable Package</h1>
+
+<div id="carousel-container" style="position:relative; height:250px; width:400px; margin:0 auto 20px;">
+    <img src="c1.png" class="carousel-img" style="opacity:1">
+    <img src="c2.png" class="carousel-img" style="opacity:0">
+    <img src="c3.png" class="carousel-img" style="opacity:0">
+    <img src="c4.png" class="carousel-img" style="opacity:0">
+    <img src="c5.png" class="carousel-img" style="opacity:0">
+</div>
+
+<div class="vehicles">
+    <h3>Vehicles Included:</h3>
+    <ul>
+        <li>Falcon Interceptor Utility 2019</li>
+        <li>Bullhorn Prancer Pursuit Widebody 2020</li>
+        <li>Bullhorn Prancer Pursuit 2015</li>
+        <li>Chevlon Captain PPV 2009</li>
+        <li>Chevlon Camion PPV 2021</li>
+    </ul>
+</div>
+
+<button onclick="window.open('gamepass-check.html','_blank')">Buy Now</button>
+<div class="notice">You will need to enter your Roblox username twice to confirm, then purchase the gamepass.</div>
+
+<script>
+// Simple carousel
+let current=0;
+const images = document.querySelectorAll('.carousel-img');
+setInterval(()=>{
+    images[current].style.opacity=0;
+    current = (current+1)%images.length;
+    images[current].style.opacity=1;
+},3000);
+</script>
+
+</body>
+</html>
+  
