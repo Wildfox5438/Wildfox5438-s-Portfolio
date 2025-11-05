@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TxDPS Gamepass Check</title>
+<style>
+body { background:#0e0e0e; color:white; font-family:Arial,sans-serif; text-align:center; padding:50px; }
+input, button { padding:10px; margin:5px; border-radius:10px; border:none; }
+button { background:#0078ff; color:white; cursor:pointer; font-weight:bold; }
+button:hover { background:#005bcc; }
+#result { margin-top:20px; font-size:1.2em; }
+.codes { text-align:left; max-width:600px; margin:20px auto; background:#1a1a1a; padding:20px; border-radius:15px; }
+</style>
+</head>
+<body>
+
+<h1>🎮 TxDPS Constable Gamepass Checker</h1>
+<p>Enter your Roblox username twice to confirm:</p>
+<input type="text" id="username1" placeholder="Enter username">
+<input type="text" id="username2" placeholder="Confirm username"><br><br>
+<button onclick="checkGamepass()">Check Gamepass Ownership</button>
+<div id="result"></div>
+
+<div class="codes" id="codes" style="display:none;">
+<h3>Codes:</h3>
+<ul>
+<li>Bullhorn Prancer Pursuit Widebody 2020: Right1: 108445176033076, Left1: 82996942403106</li>
+<li>Chevlon Camion PPV 2021: Left: 79119926890525, Right: 108445176033076</li>
+<li>Bullhorn Prancer Pursuit 2015: Right: 78449154781713, Left: 85648599430753</li>
+<li>Falcon Interceptor Utility 2019: Left: 99883043035428, Right: 75315162020502</li>
+<li>Chevlon Captain PPV 2009: Left: 134132225864391, Right: 84942655623223</li>
+</ul>
+</div>
+
+<p class="notice">If checking takes longer than 1 minute, please contact Wildfox directly. Response expected within 24 hours.</p>
+
+<script>
+async function checkGamepass() {
+    const u1=document.getElementById('username1').value.trim();
+    const u2=document.getElementById('username2').value.trim();
+    const result=document.getElementById('result');
+
+    if(!u1 || !u2) { result.innerHTML='⚠️ Enter both usernames.'; return; }
+    if(u1!==u2) { result.innerHTML='⚠️ Usernames do not match.'; return; }
+
+    result.innerHTML='⏳ Checking ownership... This may take up to 1 minute.';
+    
+    // Roblox API check (using your proxy)
+    try {
+        const res=await fetch(`https://roblox-proxy-px3p.onrender.com/api/ownership?username=${u1}&gamepassId=1574565046`);
+        const data=await res.json();
+        if(data.owned){
+            result.innerHTML='✅ Ownership confirmed!';
+            document.getElementById('codes').style.display='block';
+        } else {
+            result.innerHTML='❌ You do not own the gamepass yet. Please purchase it first: <a href="https://www.roblox.com/game-pass/1574565046/TxDPS-Constable-package" target="_blank">Purchase Here</a>';
+        }
+    } catch(e){
+        console.error(e);
+        result.innerHTML='⚠️ Error connecting to server.';
+    }
+}
+</script>
+
+</body>
+</html>
