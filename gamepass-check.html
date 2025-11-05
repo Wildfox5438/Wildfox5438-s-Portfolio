@@ -11,6 +11,7 @@ button { background:#0078ff; color:white; cursor:pointer; font-weight:bold; }
 button:hover { background:#005bcc; }
 #result { margin-top:20px; font-size:1.2em; }
 .codes { text-align:left; max-width:600px; margin:20px auto; background:#1a1a1a; padding:20px; border-radius:15px; }
+.notice { margin-top:20px; font-size:0.9em; color:#bbb; }
 </style>
 </head>
 <body>
@@ -37,28 +38,38 @@ button:hover { background:#005bcc; }
 
 <script>
 async function checkGamepass() {
-    const u1=document.getElementById('username1').value.trim();
-    const u2=document.getElementById('username2').value.trim();
-    const result=document.getElementById('result');
+    const u1 = document.getElementById('username1').value.trim();
+    const u2 = document.getElementById('username2').value.trim();
+    const result = document.getElementById('result');
 
-    if(!u1 || !u2) { result.innerHTML='⚠️ Enter both usernames.'; return; }
-    if(u1!==u2) { result.innerHTML='⚠️ Usernames do not match.'; return; }
+    if(!u1 || !u2) { 
+        result.innerHTML = '⚠️ Enter both usernames.'; 
+        return; 
+    }
+    if(u1 !== u2) { 
+        result.innerHTML = '⚠️ Usernames do not match.'; 
+        return; 
+    }
+    if(u1.toLowerCase() === 'wildfox5438' || u2.toLowerCase() === 'wildfox5438') {
+        result.innerHTML = '⚠️ You cannot enter Wildfox5438 as the username.';
+        return;
+    }
 
-    result.innerHTML='⏳ Checking ownership... This may take up to 1 minute.';
-    
+    result.innerHTML = '⏳ Checking ownership... This may take up to 1 minute.';
+
     // Roblox API check (using your proxy)
     try {
-        const res=await fetch(`https://roblox-proxy-px3p.onrender.com/api/ownership?username=${u1}&gamepassId=1574565046`);
-        const data=await res.json();
+        const res = await fetch(`https://roblox-proxy-px3p.onrender.com/api/ownership?username=${u1}&gamepassId=1574565046`);
+        const data = await res.json();
         if(data.owned){
-            result.innerHTML='✅ Ownership confirmed!';
-            document.getElementById('codes').style.display='block';
+            result.innerHTML = '✅ Ownership confirmed!';
+            document.getElementById('codes').style.display = 'block';
         } else {
-            result.innerHTML='❌ You do not own the gamepass yet. Please purchase it first: <a href="https://www.roblox.com/game-pass/1574565046/TxDPS-Constable-package" target="_blank">Purchase Here</a>';
+            result.innerHTML = '❌ You do not own the gamepass yet. Please purchase it first: <a href="https://www.roblox.com/game-pass/1574565046/TxDPS-Constable-package" target="_blank">Purchase Here</a>';
         }
     } catch(e){
         console.error(e);
-        result.innerHTML='⚠️ Error connecting to server.';
+        result.innerHTML = '⚠️ Error connecting to server.';
     }
 }
 </script>
