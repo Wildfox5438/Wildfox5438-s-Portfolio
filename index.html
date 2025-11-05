@@ -35,21 +35,28 @@
         .nav-links { list-style: none; display: flex; gap: 30px; }
         .nav-links a { text-decoration: none; color: var(--text-color); font-weight: 400; transition: color 0.3s ease; }
         .nav-links a:hover { color: var(--primary-color); }
+
+        /* STORE BUTTON STYLING */
+        .nav-links .store-btn {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .nav-links .store-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 240, 255, 0.2);
+        }
+
         #hero { height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; flex-direction: column; padding-top: 80px; }
         #hero h1 { font-size: 4.5rem; background: linear-gradient(90deg, #fff, var(--primary-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
         #hero .subtitle { font-size: 1.5rem; color: var(--text-muted); font-weight: 300; }
         .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 40px; }
         .portfolio-item { background: var(--card-color); border: 1px solid var(--border-color); border-radius: 10px; aspect-ratio: 16 / 10; position: relative; overflow: hidden; transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
         .portfolio-item:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); }
-        
-        /* THIS IS THE FIX: "object-fit: contain" */
-        .portfolio-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; /* <-- THIS IS THE FIX */
-            transition: transform 0.4s ease;
-        }
-        
+        .portfolio-item img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.4s ease; }
         .portfolio-item:hover img { transform: scale(1.05); }
         .portfolio-item .coming-soon { display: flex; align-items: center; justify-content: center; height: 100%; font-size: 1.2rem; font-style: italic; color: var(--text-muted); }
         .portfolio-item .overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%); padding: 30px 20px 15px; color: white; font-weight: 600; font-size: 1.1rem; transform: translateY(100%); opacity: 0; transition: transform 0.4s ease, opacity 0.4s ease; }
@@ -72,6 +79,7 @@
         <nav>
             <a href="#hero" class="logo">Wildfox5438</a>
             <ul class="nav-links">
+                <li><a href="store.html" class="store-btn">Store</a></li> <!-- NEW STORE BUTTON -->
                 <li><a href="#portfolio">Past Work</a></li>
                 <li><a href="#pricing">Pricing</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -87,8 +95,7 @@
 
         <section id="portfolio" class="container hidden">
             <h2>Past Work</h2>
-            <div class="portfolio-grid" id="portfolio-grid">
-                </div>
+            <div class="portfolio-grid" id="portfolio-grid"></div>
         </section>
 
         <section id="pricing" class="container hidden">
@@ -114,106 +121,4 @@
                 <a href="https://discord.gg/2hBSxA6DJm" target="_blank" class="btn">Cloud Customs</a>
                 <a href="https://discord.gg/xXy6C8FvCB" target="_blank" class="btn">Concept Customs</a>
                 <a href="https://discord.gg/jcS3ctngPX" target="_blank" class="btn">Pulse Customs</a>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2025 Wildfox5438. All rights reserved.</p>
-    </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-
-            const portfolioGrid = document.getElementById('portfolio-grid');
-            const totalSlots = 30;
-
-            // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            //
-            //            HOW TO ADD YOUR IMAGES
-            //
-            // 1. Put your image file (e.g., "my-car.png") in the 
-            //    same folder as this index.html file.
-            //
-            // 2. Add the filename inside the quotes '' for the
-            //    slot you want to fill.
-            //
-            // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            
-            const myImages = [
-    'image1.png',  // Slot 1
-    'image2.png',  // Slot 2
-    'image3.png',  // Slot 3
-    'image4.png',  // Slot 4
-    'image5.png',  // Slot 5
-    'image6.png',  // Slot 6
-    'image7.png',  // Slot 7
-    'image8.png',  // Slot 8
-    'image9.png',  // Slot 9
-    'image10.png', // Slot 10
-    'image11.png', // Slot 11
-    'image12.png', // Slot 12
-    'image13.png', // Slot 13
-    'image14.png', // Slot 14
-    'image15.png', // Slot 15
-    'image16.png', // Slot 16
-    'image17.png', // Slot 17
-    'image18.png', // Slot 18
-    'image19.png', // Slot 19
-    'image20.png', // Slot 20
-    'image21.png', // Slot 21
-    'image22.png', // Slot 22
-    'image23.png', // Slot 23
-    'image24.png', // Slot 24
-    'image25.png', // Slot 25
-    'image26.png', // Slot 26
-    'image27.png', // Slot 27
-    'image28.png', // Slot 28
-    'image29.png', // Slot 29
-    'image30.png'  // Slot 30
-];
-
-
-            // --- This code builds the grid. No need to edit below this line! ---
-            
-            for (let i = 0; i < totalSlots; i++) {
-                const item = document.createElement('div');
-                item.classList.add('portfolio-item', 'hidden'); 
-
-                const imageName = myImages[i];
-                const displayName = `Image ${i + 1}`;
-
-                if (imageName && imageName.trim() !== '') {
-                    // There IS an image, build the image tag
-                    item.innerHTML = `
-                        <img src="${imageName}" alt="${displayName}">
-                        <div class="overlay">${displayName}</div>
-                    `;
-                } else {
-                    // There is NO image, show placeholder
-                    item.innerHTML = `
-                        <span class="coming-soon">Coming soon...</span>
-                        <div class="overlay">${displayName}</div>
-                    `;
-                }
-                portfolioGrid.appendChild(item);
-            }
-
-            // === SCROLL ANIMATION OBSERVER ===
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('show');
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-
-            const hiddenElements = document.querySelectorAll('.hidden');
-            hiddenElements.forEach((el) => observer.observe(el));
-        });
-    </script>
-
-</body>
-</html>
+           
