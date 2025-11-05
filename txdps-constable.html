@@ -5,12 +5,59 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TxDPS Constable Package</title>
 <style>
-body { background:#101010; color:white; font-family:Arial,sans-serif; text-align:center; padding:50px; }
+body {
+    background:#101010;
+    color:white;
+    font-family:Arial,sans-serif;
+    text-align:center;
+    padding:50px;
+}
 h1 { color:#00f0ff; margin-bottom:20px; }
-#carousel { width:400px; height:250px; margin:0 auto 20px; border-radius:15px; overflow:hidden; }
-#carousel img { width:100%; height:100%; object-fit:contain; transition:opacity 1s ease; position:absolute; }
-.vehicles { text-align:left; max-width:600px; margin:0 auto 20px; }
-button { background:#00f0ff; color:#101010; padding:15px 30px; border:none; border-radius:50px; cursor:pointer; font-weight:bold; margin:10px; }
+
+/* Carousel container */
+#carousel-container {
+    width:400px;
+    height:250px;
+    margin:0 auto 20px;
+    border-radius:25px;
+    overflow:hidden;
+    border: 3px solid #00f0ff;
+    position: relative;
+}
+
+/* Inner slider wrapper */
+#carousel-slider {
+    display:flex;
+    width:2000px; /* 5 images x 400px */
+    height:100%;
+    transition: transform 1s ease-in-out;
+}
+
+/* Each image */
+#carousel-slider img {
+    width:400px;
+    height:250px;
+    object-fit:cover;
+    border-radius:25px;
+}
+
+/* Vehicles list */
+.vehicles {
+    text-align:left;
+    max-width:600px;
+    margin:0 auto 20px;
+}
+
+button {
+    background:#00f0ff;
+    color:#101010;
+    padding:15px 30px;
+    border:none;
+    border-radius:50px;
+    cursor:pointer;
+    font-weight:bold;
+    margin:10px;
+}
 button:hover { background:#00c0ff; }
 .notice { color:#888; font-style:italic; margin-top:15px; }
 </style>
@@ -19,12 +66,14 @@ button:hover { background:#00c0ff; }
 
 <h1>TxDPS Constable Package</h1>
 
-<div id="carousel-container" style="position:relative; height:250px; width:400px; margin:0 auto 20px;">
-    <img src="c1.png" class="carousel-img" style="opacity:1">
-    <img src="c2.png" class="carousel-img" style="opacity:0">
-    <img src="c3.png" class="carousel-img" style="opacity:0">
-    <img src="c4.png" class="carousel-img" style="opacity:0">
-    <img src="c5.png" class="carousel-img" style="opacity:0">
+<div id="carousel-container">
+    <div id="carousel-slider">
+        <img src="c1.png" alt="Car 1">
+        <img src="c2.png" alt="Car 2">
+        <img src="c3.png" alt="Car 3">
+        <img src="c4.png" alt="Car 4">
+        <img src="c5.png" alt="Car 5">
+    </div>
 </div>
 
 <div class="vehicles">
@@ -42,16 +91,16 @@ button:hover { background:#00c0ff; }
 <div class="notice">You will need to enter your Roblox username twice to confirm, then purchase the gamepass.</div>
 
 <script>
-// Simple carousel
-let current=0;
-const images = document.querySelectorAll('.carousel-img');
-setInterval(()=>{
-    images[current].style.opacity=0;
-    current = (current+1)%images.length;
-    images[current].style.opacity=1;
-},3000);
+// Sliding carousel logic
+const slider = document.getElementById('carousel-slider');
+const totalImages = slider.children.length;
+let index = 0;
+
+setInterval(() => {
+    index = (index + 1) % totalImages;
+    slider.style.transform = `translateX(-${index * 400}px)`; // Slide 400px per image
+}, 3000);
 </script>
 
 </body>
 </html>
-  
